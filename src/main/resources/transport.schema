@@ -1,0 +1,18 @@
+create gdb "transport" into "./transport.gdb"
+
+create node stop
+create attribute stop.id string unique
+create attribute stop.name string basic
+create attribute stop.lat float basic
+create attribute stop.lon float basic
+
+create node route 
+create attribute route.id string unique
+create attribute route.short_name string basic
+create attribute route.long_name string basic 
+create attribute route.url string basic 
+create attribute route.type integer basic
+
+create edge connects materialize neighbors
+
+create edge has_stop materialize neighbors

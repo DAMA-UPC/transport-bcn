@@ -1,0 +1,35 @@
+
+open gdb "transport" into "./transport.gdb"
+
+load nodes "./stops.csv"
+columns id, name, lat, lon
+into stop
+from 1
+log "stops.csv.log"
+
+load nodes "./routes.csv"
+columns agency, id, short_name, long_name, url, type, color, text_color
+into route
+ignore agency, color, text_color
+from 1
+log "routes.csv.log"
+
+load edges "./stop_edges.csv"
+columns id1, id2
+into connects
+ignore id1, id2
+where
+  tail id1=stop.id
+  head id2=stop.id
+from 1
+log "stop_edges.csv.log"
+
+load edges "./stop_to_route.csv"
+columns id1, id2
+into connects
+ignore id1, id2
+where
+  tail id2=route.id
+  head id1=stop.id
+from 1
+log "stop_to_route.csv.log"
