@@ -19,11 +19,11 @@ public class Loader {
 
         Schema schema = new Schema(session.getGraph());
 
-        ArrayList<String> route = Algorithms.findRoute(session, schema, "1.111","1.140" );
+        ArrayList<Integer> route = Algorithms.findRoute(session, schema, 0,29 );
 
         Graph graph = session.getGraph();
-        for( String s : route ) {
-            Objects objects = graph.select(schema.getStopIdType(), Condition.Equal, (new Value()).setString(s));
+        for( Integer id : route ) {
+            Objects objects = graph.select(schema.getStopIdType(), Condition.Equal, (new Value()).setInteger(id));
             Value value = new Value();
             graph.getAttribute(objects.any(), schema.getStopNameType(),value);
             System.out.println(value.getString());

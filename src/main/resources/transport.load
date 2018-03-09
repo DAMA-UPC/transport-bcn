@@ -8,9 +8,8 @@ from 1
 log "stops.csv.log"
 
 load nodes "./routes.csv"
-columns agency, id, short_name, long_name, url, type, color, text_color
+columns id, short_name, long_name, type
 into route
-ignore agency, color, text_color
 from 1
 log "routes.csv.log"
 
